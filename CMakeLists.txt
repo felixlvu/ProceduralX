@@ -6,9 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-option(BUILD_CLIENT "Build the client executable" ON)
-option(BUILD_SERVER "Build the server executable" ON)
-
 add_subdirectory(external/SDL3)
 add_subdirectory(external/SDL3_ttf)
 add_subdirectory(external/SDL3_image)
@@ -23,7 +20,7 @@ target_include_directories(proceduralX PRIVATE include/graphical)
 target_link_libraries(proceduralX PRIVATE SDL3::SDL3)
 target_link_libraries(proceduralX PRIVATE SDL3_ttf::SDL3_ttf)
 target_link_libraries(proceduralX PRIVATE SDL3_image::SDL3_image)
-target_link_libraries(proceduralX PRIVATE SDL3_mixer::SDL3_mixer)
+target_link_libraries(proceduralX PRIVATE SDL3_mixer::SDL3_mixer)h
 
 target_compile_definitions(proceduralX PRIVATE $<$<CONFIG:Debug>:DEBUG>)
 
