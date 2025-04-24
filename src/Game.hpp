@@ -9,6 +9,7 @@
 #include "Window.hpp"
 #include "Utils.hpp"
 #include "World.hpp"
+#include "Player.hpp"
 
 class Game {
     public:
@@ -19,4 +20,5 @@ class Game {
         void moveCamera(keyType event);
     private:
         std::shared_ptr<Window> _window;
+        Player _player;
 };

@@ -15,6 +15,7 @@
 #include <vector>
 #include <memory>
 #include <cstddef>
+#include <unordered_map>
 
 class Window {
     public:
@@ -24,9 +25,11 @@ class Window {
         void init();
         eventType updateEvents();
         keyType getInput();
-        void moveCamera(int x, int y);
+        void moveCamera(float x, float y);
+        void zoomCamera(float zoom);
         void clearWindow();
         void render();
+        float getZoom();
         SDL_Point getCamera() { return _camera; }
         SDL_Renderer *getRenderer() { return _renderer; }
         void destroyWindow();
@@ -38,4 +41,6 @@ class Window {
         SDL_Event _event;
         SDL_Point _camera;
         std::unordered_map<SDL_Scancode, bool> _keyStates;
+        std::unordered_map<SDL_Scancode, bool> _keyHandled;
+        float _zoom;
 };

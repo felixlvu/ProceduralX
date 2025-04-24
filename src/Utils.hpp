@@ -20,6 +20,7 @@ enum keyType {
   ENTER,
   ESCAPE,
   F,
-  C,
+  KEY_X,
+  KEY_C,
   NONE,
 };

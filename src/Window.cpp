@@ -12,6 +12,7 @@
 
 Window::Window() {
   _camera = {0, 0};
+  _zoom = 1;
 }
 
 Window::~Window() {}
@@ -67,10 +68,12 @@ eventType Window::updateEvents() {
         }
         if (_event.type == SDL_EVENT_KEY_DOWN) {
             _keyStates[_event.key.scancode] = true;
+            _keyHandled[_event.key.scancode] = false;
             return KEY_DOWN;
         }
         if (_event.type == SDL_EVENT_KEY_UP) {
             _keyStates[_event.key.scancode] = false;
+            _keyHandled[_event.key.scancode] = false;
         }
     }
     return NO_EVENT;
@@ -89,12 +92,31 @@ keyType Window::getInput() {
     if (_keyStates[SDL_SCANCODE_RIGHT]) {
         return RIGHT;
     }
+    if (_keyStates[SDL_SCANCODE_X] && !_keyHandled[SDL_SCANCODE_X]) {
+        _keyHandled[SDL_SCANCODE_X] = true;
+        return KEY_X;
+    }
+    if (_keyStates[SDL_SCANCODE_C] && !_keyHandled[SDL_SCANCODE_C]) {
+        _keyHandled[SDL_SCANCODE_C] = true;
+        return KEY_C;
+    }
     return NONE;
 }
 
-void Window::moveCamera(int x, int y) {
+float Window::getZoom() {
+    return _zoom;
+}
+
+void Window::moveCamera(float x, float y) {
     _camera.x += x;
     _camera.y += y;
+}
+
+void Window::zoomCamera(float zoom) {
+    _zoom += zoom;
+    _zoom = std::max(0.5f, _zoom);
+    _zoom = std::min(1.5f, _zoom);
+    std::cout << "Zoom: " << _zoom << std::endl;
 }
 
 
